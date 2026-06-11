@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ookini | Café de Especialidad</title>
+    <style>
+        /* --- VARIABLES DE COLOR (Verdes opacos, tierra y vitral) --- */
+        :root {
+            --bg-dark: #121814;       /* Fondo principal, selva profunda */
+            --glass-green: #1b2e24;   /* Verde opaco translúcido */
+            --glass-border: #2e4438;  /* Bordes de los paneles de vitral */
+            --text-light: #e4eae6;    /* Blanco neblina para lectura */
+            --text-muted: #94a399;    /* Verde grisáceo para textos secundarios */
+            --accent-amber: #c28843;  /* Acento ámbar/oro viejo (luz de vitral) */
+            --font-serif: 'Playfair Display', Georgia, serif;
+            --font-sans: 'Inter', system-ui, sans-serif;
+        }
+
+        /* --- ESTILOS GENERALES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Tipografías sofisticadas */
+        h1, h2, h3, .brand-logo {
+            font-family: var(--font-serif);
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* --- HEADER & NAVEGACIÓN --- */
+        header {
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-logo {
+            font-size: 1.8rem;
+            color: var(--text-light);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand-logo::before {
+            content: '';
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            background-color: var(--accent-amber);
+            border-radius: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-amber);
+        }
+
+        /* --- SECCIÓN HERO (INICIO) --- */
+        #home {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            /* Efecto visual de neblina/humedad orgánica en el fondo */
+            background: radial-gradient(circle at 80% 20%, #1a3325 0%, var(--bg-dark) 60%);
+        }
+
+        .hero-content {
+            max-width: 600px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+        }
+
+        /* Botón Estilo Vitral */
+        .btn-cta {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background-color: var(--glass-green);
+            color: var(--text-light);
+            text-decoration: none;
+            border: 1px solid var(--accent-amber);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.4s ease;
+            box-shadow: inset 0 0 10px rgba(194, 136, 67, 0.1);
+        }
+
+        .btn-cta:hover {
+            background-color: var(--accent-amber);
+            color: var(--bg-dark);
+            box-shadow: 0 0 20px rgba(194, 136, 67, 0.3);
+        }
+
+        /* --- SECCIÓN SOBRE NOSOTROS --- */
+        #about {
+            padding: 8rem 0;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+        }
+
+        /* Estética Stained Glass (Vitral Digital Asimétrico) */
+        .glass-art {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 150px);
+            gap: 10px;
+            padding: 10px;
+            border: 1px solid var(--glass-border);
+            background-color: rgba(18, 24, 20, 0.5);
+        }
+
+        .glass-panel {
+            border: 1px solid var(--glass-border);
+            transition: background-color 0.5s;
+        }
+
+        .panel-1 { background-color: #16241c; grid-row: span 2; }
+        .panel-2 { background-color: #223a2b; }
+        .panel-3 { background-color: #121e17; }
+        .panel-4 { background-color: #2c4435; grid-column: span 2; }
+
+        /* --- SECCIÓN REGLAS Y EXPERIENCIA --- */
+        #experience {
+            padding: 8rem 0;
+            background: linear-gradient(180deg, var(--bg-dark) 0%, #0d120f 100%);
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .rules-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .rule-card {
+            background-color: rgba(27, 46, 36, 0.3);
+            border: 1px solid var(--glass-border);
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Resaltar la exclusividad */
+        .rule-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 3px;
+            background: var(--glass-border);
+        }
+
+        .rule-card.featured::before {
+            background: var(--accent-amber);
+        }
+
+        .rule-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+        }
+
+        .rule-card .price {
+            font-family: var(--font-serif);
+            font-size: 2.5rem;
+            color: var(--accent-amber);
+            margin: 1.5rem 0;
+        }
+
+        .rule-list {
+            list-style: none;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            text-align: left;
+            margin-top: 1.5rem;
+        }
+
+        .rule-list li {
+            margin-bottom: 0.8rem;
+            position: relative;
+            padding-left: 1.2rem;
+        }
+
+        .rule-list li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--accent-amber);
+        }
+
+        /* --- SECCIÓN CONTACTO / HORARIOS --- */
+        #contact {
+            padding: 6rem 0;
+            border-top: 1px solid var(--glass-border);
+            text-align: center;
+        }
+
+        .info-box {
+            max-width: 500px;
+            margin: 0 auto 3rem auto;
+            border: 1px solid var(--glass-border);
+            padding: 2rem;
+            background-color: rgba(27, 46, 36, 0.1);
+        }
+
+        .info-box p {
+            margin-bottom: 0.5rem;
+        }
+
+        footer {
+            padding: 2rem 0;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            border-top: 1px solid rgba(46, 68, 56, 0.3);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .about-grid, .rules-grid { grid-template-columns: 1fr; }
+            .hero-content h1 { font-size: 2.5rem; }
+        }
+    </style>
+    <!-- Importación de tipografía elegante Serif -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- NAVEGACIÓN -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="brand-logo">Ookini</a>
+                <ul class="nav-links">
+                    <li><a href="#home">Inicio</a></li>
+                    <li><a href="#about">Nosotros</a></li>
+                    <li><a href="#experience">Experiencias</a></li>
+                    <li><a href="#contact">Visítanos</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>El ritual del café, envuelto en la bruma.</h1>
+                <p>Un espacio minimalista diseñado para los devotos del café de especialidad. En Ookini, el tiempo se ralentiza y cada taza cuenta una historia botánica.</p>
+                <a href="#experience" class="btn-cta">Reservar Experiencia</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOBRE NOSOTROS -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">El Significado de Ookini</h2>
+            <div class="about-grid">
+                <div class="about-text">
+                    <p>En el dialecto tradicional de Kansai, Japón, <em>"Ookini"</em> es mucho más que un simple gracias. Es una expresión profunda de gratitud, calidez y conexión con el otro.</p>
+                    <p>Hemos fusionado esa filosofía de hospitalidad con la fuerza orgánica y húmeda de la naturaleza. Aquí, el minimalismo arquitectónico se encuentra con la exuberancia de la selva para aislarte del ruido exterior y entregarte un santuario de apreciación sensorial.</p>
+                </div>
+                <!-- Composición geométrica simulando vitral (Stained Glass) -->
+                <div class="glass-art">
+                    <div class="glass-panel panel-1"></div>
+                    <div class="glass-panel panel-2"></div>
+                    <div class="glass-panel panel-3"></div>
+                    <div class="glass-panel panel-4"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXPERIENCIAS / REGLAS DEL NEGOCIO -->
+    <section id="experience">
+        <div class="container">
+            <h2 class="section-title">Nuestros Rituales</h2>
+            <div class="rules-grid">
+                
+                <!-- Preparaciones Especiales -->
+                <div class="rule-card featured">
+                    <h3>Filtrados Especiales</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Métodos complejos y lentos</p>
+                    <div class="price">$5 - $8</div>
+                    <a href="#contact" class="btn-cta" style="padding: 0.6rem 1.5rem; font-size: 0.8rem;">Reservar</a>
+                    <ul class="rule-list">
+                        <li><strong>V60:</strong> $5 USD</li>
+                        <li><strong>Kyoto Drip:</strong> $7 USD</li>
+                        <li><strong>Siphon:</strong> $8 USD</li>
+                        <li>Máximo 50 tazas por día en total.</li>
+                        <li>Límite de 2 tazas por persona al día.</li>
+                        <li>Requiere reserva previa obligatoria.</li>
+                    </ul>
+                </div>
+
+                <!-- Prensa Francesa Walk-in -->
+                <div class="rule-card">
+                    <h3>Prensa Francesa</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">El flujo libre del día</p>
+                    <div class="price">$3</div>
+                    <span style="color: var(--accent-amber); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">Walk-In (Sin Reserva)</span>
+                    <ul class="rule-list">
+                        <li>Disponible de forma continua.</li>
+                        <li>Sin límite de tazas por persona.</li>
+                        <li>Servido hasta la hora de cierre del local.</li>
+                        <li>Ideal para integrarse al entorno natural del espacio.</li>
+                    </ul>
+                </div>
+
+                <!-- Cata Semanal -->
+                <div class="rule-card featured">
+                    <h3>Cata Semanal</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Inmersión para conocedores</p>
+                    <div class="price">$25</div>
+                    <a href="#contact" class="btn-cta" style="padding: 0.6rem 1.5rem; font-size: 0.8rem;">Reservar Cupo</a>
+                    <ul class="rule-list">
+                        <li>Una sesión exclusiva por semana.</li>
+                        <li>Estrictamente limitado a 8 cupos.</li>
+                        <li>Precio por persona (USD).</li>
+                        <li>Incluye múltiples degustaciones guiadas de orígenes únicos.</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACTO Y HORARIOS -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Visítanos en el Santuario</h2>
+            <div class="info-box">
+                <h3 style="margin-bottom: 1rem; color: var(--accent-amber);">Horario de Atención</h3>
+                <p><strong>Todos los días</strong></p>
+                <p style="font-size: 1.2rem; font-family: var(--font-serif); margin-bottom: 1.5rem;">8:00 a. m. — 8:00 p. m.</p>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Para dudas sobre disponibilidad de tazas especiales o reservas de catas, escríbenos directamente.</p>
+            </div>
+            <p style="color: var(--text-muted);">Ookini Café de Especialidad © 2026</p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>Diseño y concepto web minimalista internacional.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,60 @@
+body {
+    background-color: #F5F7DC;
+    font-family: 'Rozha One', regular;
+    color: #0F0326;
+}
+h1 {
+    color: #B5D99C;
+    font-size: 8rem;
+    padding: 0.5rem 0.5rem;
+    max-width: 350px;
+    margin: 0 auto;
+}
+header {
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid #877666;
+}
+nav a {
+    color:#36827F;
+}
+main {
+    padding: 3rem 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+.metodo-titulo {
+    font-size: 1.1rem;
+    letter-spacing: 0.5rem;
+    text-transform: uppercase;
+    margin-bottom: 0.25rem;
+    color: #36827F;
+
+}
+.precio {
+    font-weight: bold;
+    color:#877666;
+}
+footer {
+    padding: 2rem 5rem;
+    max-width: 500px;
+    margin: 0 auto;
+    border-top: 1px solid #36827F;
+    text-transform: uppercase;
+}
+
+#contador-tazas {
+font-size: 1.5rem;
+font-weight: bold;
+color: #36827F;
+}
+
+#boton-reservar {
+display: block;
+margin-top: Irem;
+padding: 0.5rem 1.25rem;
+background-color: #36827F; color: #F5F7DC;
+border: none;
+font-family: Georgia, serif;
+font-size: 1rem;
+cursor: pointer;
+}
